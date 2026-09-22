@@ -15,11 +15,14 @@
 | `scripts/GetItems.js` | Выбор элементов для повторения |
 | `scripts/NotificationService.js` | Ежедневные уведомления |
 | `scripts/SessionService.js` | Создание и ведение сессий |
+| `scripts/SetupService.js` | Первичное создание служебных листов |
 | `scripts/TelegramService.js` | Запросы к Telegram API |
 | `scripts/TelegramRichTest.js.js` | Проверка Rich Messages |
 | `scripts/Webhook.js` | `doPost`, `doGet` и обработка команд Telegram |
 
 Все `.js`-файлы одного Apps Script проекта используют общее пространство функций.
+
+Для первичной установки `setupProjectSheetsV1()` создаёт только отсутствующие `CONFIG`, `SESSIONS`, `SESSION_ITEMS` и `LOG`. Существующие данные она не меняет. `FUNCTION` проверяется, но не создаётся и не перезаписывается, поскольку его интервалы связаны с формулами учебной таблицы.
 
 `import` и `export` не нужны.
 
