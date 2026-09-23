@@ -42,17 +42,9 @@ function setupProjectSheetsV1() {
 
   const result = {
     created: created,
-    existing: existing,
-    functionSheetFound: Boolean(ss.getSheetByName('FUNCTION'))
+    existing: existing
   };
 
   Logger.log(JSON.stringify(result));
-  if (!result.functionSheetFound) {
-    throw new Error(
-      'Служебные листы созданы, но лист FUNCTION не найден. ' +
-      'Скопируйте его из совместимой таблицы Kanji Reader.'
-    );
-  }
-
   return result;
 }

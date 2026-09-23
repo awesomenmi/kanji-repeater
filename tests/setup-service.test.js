@@ -4,8 +4,8 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
 
-function fixture(withFunction = true) {
-  const sheets = withFunction ? { FUNCTION: {} } : {};
+function fixture() {
+  const sheets = {};
   function createSheet(name) {
     const sheet = {
       values: [],
@@ -35,18 +35,20 @@ function fixture(withFunction = true) {
   return { context, sheets };
 }
 
-test('setup creates missing service sheets and keeps FUNCTION', () => {
+test('setup creates missing service sheets', () => {
   const { context, sheets } = fixture();
   const result = context.setupProjectSheetsV1();
   assert.deepEqual(Array.from(result.created), ['CONFIG', 'SESSIONS', 'SESSION_ITEMS', 'LOG']);
-  assert.equal(result.functionSheetFound, true);
   assert.equal(sheets.LOG.values[0][0], 'Timestamp');
   assert.equal(sheets.LOG.values[0][10], 'Event ID');
 });
 
-test('setup preserves created sheets and reports missing FUNCTION', () => {
-  const { context, sheets } = fixture(false);
-  assert.throws(() => context.setupProjectSheetsV1(), /FUNCTION не найден/);
-  assert.ok(sheets.CONFIG);
-  assert.ok(sheets.LOG);
+test('setup preserves existing service sheets', () => {
+  const { context, sheets } = fixture();
+  context.setupProjectSheetsV1();
+  const config = sheets.CONFIG;
+  const result = context.setupProjectSheetsV1();
+  assert.equal(sheets.CONFIG, config);
+  assert.deepEqual(Array.from(result.created), []);
+  assert.deepEqual(Array.from(result.existing), ['CONFIG', 'SESSIONS', 'SESSION_ITEMS', 'LOG']);
 });
