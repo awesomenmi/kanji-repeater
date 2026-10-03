@@ -13,7 +13,8 @@
 | `scripts/CreateLists.js` | Лист CONFIG и список активных учебных листов |
 | `scripts/DailyReviewQueue.js` | Дневной лимит, бонус, сортировка и очередь |
 | `scripts/GetItems.js` | Выбор элементов для повторения |
-| `scripts/NotificationService.js` | Ежедневные уведомления |
+| `scripts/NotificationService.js` | Формирование и отправка обзора повторений |
+| `scripts/ReviewReminderService.js` | Ежедневный запуск, автоматические напоминания и их триггеры |
 | `scripts/SessionService.js` | Создание и ведение сессий |
 | `scripts/SetupService.js` | Первичное создание служебных листов |
 | `scripts/TelegramService.js` | Запросы к Telegram API |
@@ -21,6 +22,8 @@
 | `scripts/Webhook.js` | `doPost`, `doGet` и обработка команд Telegram |
 
 Все `.js`-файлы одного Apps Script проекта используют общее пространство функций.
+
+Рабочее Web App deployment `AKfycbyyq8Wvn9OLySo-qnL-69vgQnJTw9LgDWDz22T6L5q9bPUwQNvdPsghLQ2tOLG5IxOO` обновлено 2026-10-03 до версии **48**: автоматические напоминания и обработка блоков кандзи до строки 46 включительно. URL развёртывания сохранён.
 
 Для первичной установки `setupProjectSheetsV1()` создаёт только отсутствующие `CONFIG`, `SESSIONS`, `SESSION_ITEMS` и `LOG`. Существующие данные она не меняет.
 
@@ -40,6 +43,9 @@
 | `TELEGRAM_CHAT_ID`        | ID чата                                 |
 | `TELEGRAM_WEBHOOK_SECRET` | Случайный секрет для проверки webhook |
 | `TELEGRAM_WEBAPP_URL` | Необязательный URL другого опубликованного deployment `/exec` |
+| `DAILY_REVIEW_NOTIFICATION_COUNT` | Максимум автоматических уведомлений в день, включая основное; по умолчанию 3, 0 отключает |
+| `REVIEW_NOTIFICATION_INTERVAL_MINUTES` | Интервал напоминаний в минутах; по умолчанию 120 |
+| `DAILY_REVIEW_NOTIFICATION_STATE` | Внутреннее состояние дневной цепочки напоминаний |
 | `MAX_DAILY_KANJI`         | Постоянный дневной лимит                |
 | `DAILY_LIMIT_BONUS_STATE` | Временный бонус и обработанные callback |
 | `TELEGRAM_USER_PREFERENCES` | Язык интерфейса и форма русского обращения |

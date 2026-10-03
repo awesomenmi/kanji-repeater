@@ -295,6 +295,7 @@ function getDueItemsV18(sheetName) {
 
   const firstColumn = 2; // B
   const blockHeight = 5;
+  const lastKanjiRow = 46;
 
   const dataRange =
     sheet.getDataRange();
@@ -305,7 +306,7 @@ function getDueItemsV18(sheetName) {
   const dataLastRow =
     Math.min(
       dataRange.getLastRow(),
-      40
+      lastKanjiRow + 3 // Countdown последнего блока
     );
 
 
@@ -348,7 +349,7 @@ function getDueItemsV18(sheetName) {
 
   for (
     let kanjiRow = 1;
-    kanjiRow <= dataLastRow;
+    kanjiRow <= Math.min(lastKanjiRow, dataLastRow);
     kanjiRow += blockHeight
   ) {
 

@@ -19,7 +19,7 @@ function render(queue, sessions, dueCount) {
   };
   vm.createContext(context);
   vm.runInContext(fs.readFileSync(path.join(__dirname, '../scripts/NotificationService.js'), 'utf8'), context);
-  context.sendDailyReviewNotificationV25();
+  context.sendReviewOverviewV1();
   return html;
 }
 

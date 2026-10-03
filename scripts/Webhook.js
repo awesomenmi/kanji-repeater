@@ -52,7 +52,7 @@ function doPost(e) {
 
     if (update.message && /^\/start(?:@\w+)?(?:\s|$)/.test(update.message.text || '')) {
 
-      sendDailyReviewNotificationV25();
+      sendReviewOverviewV1();
 
       return HtmlService
         .createHtmlOutput('OK');
@@ -101,7 +101,7 @@ function doPost(e) {
       );
 
       if (data === 'menu:review') {
-        sendDailyReviewNotificationV25();
+        sendReviewOverviewV1();
         return HtmlService.createHtmlOutput('OK');
       }
 
@@ -191,7 +191,7 @@ function doPost(e) {
           limitResult.status === 'OK'
         ) {
 
-          sendDailyReviewNotificationV25();
+          sendReviewOverviewV1();
 
           return HtmlService
             .createHtmlOutput('OK');
@@ -241,7 +241,7 @@ function doPost(e) {
           return session.sheetName === sheetName;
         });
         if (!sheetName || (!isActiveSheet && !hasSession)) {
-          sendDailyReviewNotificationV25();
+          sendReviewOverviewV1();
           return HtmlService.createHtmlOutput('OK');
         }
 
@@ -268,7 +268,7 @@ function doPost(e) {
           !session.itemCount ||
           session.itemCount < 1
         ) {
-          sendDailyReviewNotificationV25();
+          sendReviewOverviewV1();
 
           return HtmlService
             .createHtmlOutput('OK');

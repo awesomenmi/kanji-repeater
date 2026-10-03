@@ -11,7 +11,7 @@ function webhook() {
       TELEGRAM_WEBHOOK_SECRET: 'test-secret', TELEGRAM_CHAT_ID: '123'
     })[key] }) },
     HtmlService: { createHtmlOutput: value => value },
-    sendDailyReviewNotificationV25: () => sent.push('overview'),
+    sendReviewOverviewV1: () => sent.push('overview'),
     console: { log() {} }
   };
   vm.createContext(context);

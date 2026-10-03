@@ -85,7 +85,7 @@ function sendDailyReviewNotificationV24() {
   });
 }
 
-function sendDailyReviewNotificationV25() {
+function sendReviewOverviewV1(onlyIfPending) {
 
   expireOldActiveSessionsV1();
   const preferences = getUserPreferencesV1();
@@ -144,6 +144,11 @@ function sendDailyReviewNotificationV25() {
     return !activeSheetNames.has(String(item.sheetName));
   });
   const availableCount = startableItems.length;
+  const hasPendingReview = activeSessions.length > 0 || availableCount > 0;
+
+  if (onlyIfPending && !hasPendingReview) {
+    return false;
+  }
 
 
   // =====================================
@@ -436,5 +441,7 @@ function sendDailyReviewNotificationV25() {
     chatId,
     html
   );
+
+  return hasPendingReview;
 
 }
